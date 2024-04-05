@@ -14,12 +14,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class InitService {
 
-    private final JobRepository jobRepository;
+    private final JobService jobService;
 
     @PostConstruct
     public void init() {
-        Job job = jobRepository.findById(1L).get();
-        System.out.println(job);
+        jobService.run();
     }
 
 }
