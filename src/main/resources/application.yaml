@@ -1,0 +1,14 @@
+spring:
+
+  config:
+    import: optional:file:.env[.properties]
+
+  liquibase:
+    change-log: liquibase/db.changelog.yaml
+    enabled: true
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
