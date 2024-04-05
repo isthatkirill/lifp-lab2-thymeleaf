@@ -31,7 +31,7 @@ public class JobService {
                     .stream()
                     .filter(trust -> positiveFactIds.contains(trust.getFact().getId()))
                     .mapToDouble(trust -> trust.getTrustCf() * trust.getFact().getWeight())
-                    .sum();
+                    .sum() / positiveFactIds.size();
             resultCfs.put(job.getName(), cf);
         }
 

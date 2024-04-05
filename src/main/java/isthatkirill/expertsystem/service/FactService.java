@@ -25,7 +25,7 @@ public class FactService {
         List<Long> positiveFacts = new ArrayList<>();
 
         for (Fact fact : facts) {
-            System.out.println(fact.getDescription() + " (y/n))");
+            System.out.println(fact.getDescription() + " (y/n)");
             if (scanner.nextLine().equalsIgnoreCase("y")) {
                 positiveFacts.add(fact.getId());
             }

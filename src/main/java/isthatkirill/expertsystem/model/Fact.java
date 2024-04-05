@@ -19,7 +19,7 @@ public class Fact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 128)
+    @Column(nullable = false, length = 512)
     private String description;
 
     @Column(nullable = false)
