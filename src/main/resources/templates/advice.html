@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:utext="${COMMON_NAVBAR}"></div>
+
+<div th:switch="${facts}">
+    <h2 th:case="null">Вопросов нет!</h2>
+    <div th:case="*">
+        <h2>Ответьте на вопросы</h2>
+        <form action="/expert-system/advice" method="post">
+            <table>
+                <thead>
+                <tr>
+                    <th>Вопрос</th>
+                    <th>Да</th>
+                    <th>Нет</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="fact: ${facts}">
+                    <td th:text="${fact.description}"></td>
+                    <td>
+                        <label class="radio-label">
+                            <input type="radio" th:name="'answers[' + ${fact.id} + ']'" value="true">
+                        </label>
+                    </td>
+                    <td>
+                        <label class="radio-label">
+                            <input type="radio" th:name="'answers[' + ${fact.id} + ']'" value="false">
+                        </label>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="button-container">
+                <button class="submit-button" type="submit">Отправить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

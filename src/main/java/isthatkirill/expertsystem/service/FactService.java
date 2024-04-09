@@ -20,6 +20,10 @@ public class FactService {
     private final FactRepository factRepository;
     private final Scanner scanner = new Scanner(System.in);
 
+    public List<Fact> getFacts() {
+        return factRepository.findAll();
+    }
+
     public List<Long> getPositiveFacts() {
         List<Fact> facts = factRepository.findAll();
         List<Long> positiveFacts = new ArrayList<>();

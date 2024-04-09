@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:utext="${COMMON_NAVBAR}"></div>
+
+
+<div class="description">
+    <p>Добро пожаловать в экспертную систему, помогающую выбрать будущую
+        техническую профессию.</p>
+</div>
+
+<div class="button-container">
+    <a th:href="@{/expert-system/advice}" class="button">Узнать професиию</a>
+</div>
+
+</body>
+</html>

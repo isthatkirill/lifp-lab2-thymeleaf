@@ -40,15 +40,15 @@ public class JobService {
         Double maxValue = Collections.max(resultCfs.values());
         resultCfs.replaceAll((key, value) -> (value - minValue) / (maxValue - minValue));
 
-        // сортировка по возрастанию
+        // сортировка по убыванию
         resultCfs = resultCfs.entrySet()
                 .stream()
-                .sorted(Map.Entry.<String, Double>comparingByValue().reversed()) // Сортировка по убыванию
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 
         // вывод в консоль
         for (Map.Entry<String, Double> entry : resultCfs.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
+            System.out.printf("%70s | %.3f %n", entry.getKey(), entry.getValue());
         }
         System.out.println();
     }

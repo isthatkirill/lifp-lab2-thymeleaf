@@ -18,7 +18,7 @@ public class InitService {
 
     @PostConstruct
     public void init() {
-        jobService.run();
+        //jobService.run();
     }
 
 }
