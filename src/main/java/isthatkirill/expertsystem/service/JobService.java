@@ -19,7 +19,40 @@ public class JobService {
     private final JobRepository jobRepository;
     private final FactService factService;
 
-    public void run() {
+    public Map<String, Double> getResults(Map<String, String> facts) {
+        Map<String, Double> resultCfs = new HashMap<>();
+
+        List<Long> positiveFactIds = factService.filterPositive(facts);
+        List<Job> jobs = jobRepository.findAll();
+
+        for (Job job : jobs) {
+            Double cf = job.getTrusts()
+                    .stream()
+                    .filter(trust -> positiveFactIds.contains(trust.getFact().getId()))
+                    .mapToDouble(trust -> trust.getTrustCf() * trust.getFact().getWeight())
+                    .sum() / positiveFactIds.size();
+            resultCfs.put(job.getName(), cf);
+        }
+
+        Double minValue = Collections.min(resultCfs.values());
+        Double maxValue = Collections.max(resultCfs.values());
+        resultCfs.replaceAll((key, value) -> (value - minValue) / (maxValue - minValue));
+
+        resultCfs = resultCfs.entrySet()
+                .stream()
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
+        // TODO REMOVE
+        for (Map.Entry<String, Double> entry : resultCfs.entrySet()) {
+            System.out.printf("%70s | %.3f %n", entry.getKey(), entry.getValue());
+        }
+        System.out.println();
+
+        return resultCfs;
+    }
+
+    /*public void run() {
         Map<String, Double> resultCfs = new HashMap<>();
 
         List<Long> positiveFactIds = factService.getPositiveFacts();
@@ -51,6 +84,6 @@ public class JobService {
             System.out.printf("%70s | %.3f %n", entry.getKey(), entry.getValue());
         }
         System.out.println();
-    }
+    }*/
 
 }

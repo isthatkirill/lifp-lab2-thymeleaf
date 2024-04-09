@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -38,4 +39,10 @@ public class FactService {
         return positiveFacts;
     }
 
+    public List<Long> filterPositive(Map<String, String> facts) {
+        return facts.entrySet().stream()
+                .filter(entry -> entry.getValue().equalsIgnoreCase("true"))
+                .map(entry -> Long.parseLong(entry.getKey()))
+                .toList();
+    }
 }

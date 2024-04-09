@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<div th:utext="${COMMON_NAVBAR}"></div>
+<div th:replace="navbar"></div>
 
 <div th:switch="${facts}">
     <h2 th:case="null">Вопросов нет!</h2>
@@ -25,12 +25,12 @@
                     <td th:text="${fact.description}"></td>
                     <td>
                         <label class="radio-label">
-                            <input type="radio" th:name="'answers[' + ${fact.id} + ']'" value="true">
+                            <input type="radio" th:name="${fact.id}" value="true">
                         </label>
                     </td>
                     <td>
                         <label class="radio-label">
-                            <input type="radio" th:name="'answers[' + ${fact.id} + ']'" value="false">
+                            <input checked type="radio" th:name="${fact.id}" value="false">
                         </label>
                     </td>
                 </tr>
