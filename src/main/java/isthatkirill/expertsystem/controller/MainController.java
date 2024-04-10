@@ -38,8 +38,10 @@ public class MainController {
     }
 
     @PostMapping("/advice")
-    public void showJobs(@RequestParam Map<String, String> answers) {
+    public String showJobs(@RequestParam Map<String, String> answers, Model model) {
         Map<String, Double> resultCfs = jobService.getResults(answers);
+        model.addAttribute("resultCfs", resultCfs);
+        return "result";
     }
 
 }

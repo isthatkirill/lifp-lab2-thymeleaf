@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{navbar}"></div>
+
+
+<div th:switch="${resultCfs}">
+    <h2 th:case="null">Недостаточно данных для показа результатов!</h2>
+    <div th:case="*">
+        <h2>Результаты</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Профессия</th>
+                <th>Результат</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="result: ${resultCfs}">
+                <td>
+                    <div th:text="${result.key}"></div>
+                </td>
+                <td>
+                    <div th:text="${#numbers.formatDecimal(result.value, 1, 'COMMA', 3, 'POINT')}"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="button-container">
+    <a th:href="@{/expert-system/advice}" class="button">Ответить на вопросы заново</a>
+</div>
+
+</body>
+</html>

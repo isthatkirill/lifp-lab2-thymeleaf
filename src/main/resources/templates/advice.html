@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<div th:replace="navbar"></div>
+<div th:replace="~{navbar}"></div>
 
 <div th:switch="${facts}">
     <h2 th:case="null">Вопросов нет!</h2>
