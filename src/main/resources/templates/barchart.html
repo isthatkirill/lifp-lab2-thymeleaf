@@ -18,16 +18,26 @@
         data.push(result.value);
     });
 
-    let backgroundColors = data.map(value => value > 0.5 ? 'rgba(75, 192, 192, 0.6)' : 'rgba(255, 99, 132, 0.6)');
+    let backgroundColors = data.map(value => {
+        if (value > 0.8) {
+            return 'rgba(75, 192, 192, 0.6)'; // зеленый
+        } else if (value > 0.6) {
+            return 'rgba(255, 255, 0, 0.47)'; // желтый
+        } else if (value > 0.3) {
+            return 'rgba(255, 165, 0, 0.6)'; // оранжевый
+        } else {
+            return 'rgba(255, 99, 132, 0.6)'; // красный
+        }
+    });
 
     let chartData = {
         labels: labels,
         datasets: [{
             label: 'Уровень компетенции',
             data: data,
-            backgroundColor: backgroundColors, // Определяем цвета на основе значений
+            backgroundColor: backgroundColors,
             borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
+            borderWidth: 2
         }]
     };
 
@@ -37,10 +47,21 @@
         type: 'bar',
         data: chartData,
         options: {
+            indexAxis: 'y',
             plugins: {
                 title: {
                     display: true,
-                    text: 'Chart Title'
+                    text: 'Результаты в виде столбчатой диаграммы',
+                    padding: {
+                        top: 20,
+                        bottom: 20
+                    },
+                    font: {
+                        size: 18,
+                    }
+                },
+                legend: {
+                    position: 'right',
                 }
             },
             scales: {
@@ -48,8 +69,8 @@
                     display: true,
                     ticks: {
                         autoSkip: false,
-                        maxRotation: 90,
-                        minRotation: 90
+                        maxRotation: 0,
+                        minRotation: 0
                     }
                 }
             }
