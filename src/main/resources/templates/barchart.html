@@ -20,13 +20,13 @@
 
     let backgroundColors = data.map(value => {
         if (value > 0.8) {
-            return 'rgba(75, 192, 192, 0.6)'; // зеленый
+            return 'rgba(75, 192, 192, 0.6)';
         } else if (value > 0.6) {
-            return 'rgba(255, 255, 0, 0.47)'; // желтый
+            return 'rgba(255, 255, 0, 0.47)';
         } else if (value > 0.3) {
-            return 'rgba(255, 165, 0, 0.6)'; // оранжевый
+            return 'rgba(255, 165, 0, 0.6)';
         } else {
-            return 'rgba(255, 99, 132, 0.6)'; // красный
+            return 'rgba(255, 99, 132, 0.6)';
         }
     });
 
@@ -51,7 +51,7 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'Результаты в виде столбчатой диаграммы',
+                    text: 'Результаты',
                     padding: {
                         top: 20,
                         bottom: 20

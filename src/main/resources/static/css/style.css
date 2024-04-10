@@ -72,7 +72,7 @@
     outline: none;
     border-radius: 20px;
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 10px;
     transition: background-color 0.5s;
 }
 
@@ -82,8 +82,12 @@
 
 .button-container {
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 40px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.offset {
+    margin-bottom: 70px;
 }
 
 .description {
@@ -132,5 +136,9 @@ h2 {
     cursor: pointer;
 }
 
-
+.canvas-container {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 950px;
+}
 
