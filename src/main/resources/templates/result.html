@@ -4,20 +4,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#toggleResults").click(function () {
-                $("#resultsBlock").slideToggle("slow");
-
-                var buttonText = $(this).text();
-                if (buttonText === "Показать результаты в виде таблицы") {
-                    $(this).text("Скрыть таблицу");
-                } else {
-                    $(this).text("Показать результаты в виде таблицы");
-                }
-            });
-        });
-    </script>
+    <script th:src="@{/js/showtable.js}"></script>
 </head>
 <body>
 
