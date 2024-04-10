@@ -1,0 +1,59 @@
+<script th:inline="javascript">
+    let labels = [];
+    let data = [];
+
+
+    /*<![CDATA[*/
+
+    let resultCfs = [
+        /*[# th:each="entry : ${resultCfs}"]*/
+        {key: [[${entry.key}]], value: [[${entry.value}]]},
+        /*[/]*/
+    ];
+
+    /*]]>*/
+
+    resultCfs.forEach(function (result) {
+        labels.push(result.key);
+        data.push(result.value);
+    });
+
+    let backgroundColors = data.map(value => value > 0.5 ? 'rgba(75, 192, 192, 0.6)' : 'rgba(255, 99, 132, 0.6)');
+
+    let chartData = {
+        labels: labels,
+        datasets: [{
+            label: 'Уровень компетенции',
+            data: data,
+            backgroundColor: backgroundColors, // Определяем цвета на основе значений
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    let ctx = document.getElementById('myChart').getContext('2d');
+
+    let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Chart Title'
+                }
+            },
+            scales: {
+                x: {
+                    display: true,
+                    ticks: {
+                        autoSkip: false,
+                        maxRotation: 90,
+                        minRotation: 90
+                    }
+                }
+            }
+        }
+    });
+
+</script>
