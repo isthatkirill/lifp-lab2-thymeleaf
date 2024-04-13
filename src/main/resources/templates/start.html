@@ -7,9 +7,16 @@
 
 <div th:replace="~{navbar}"></div>
 
-<div class="description">
-    <p>Добро пожаловать в экспертную систему, помогающую выбрать будущую
-        техническую профессию.</p>
+<div th:if="${factCreated != null}">
+    <div th:text="'Факт ' + ${factCreated.description} + ' добавлен. Id = ' + ${factCreated.id}" class="description">
+    </div>
+</div>
+
+<div th:unless="${factCreated != null}">
+    <div class="description">
+        <p>Добро пожаловать в экспертную систему, помогающую выбрать будущую
+            техническую профессию.</p>
+    </div>
 </div>
 
 <div class="button-container">

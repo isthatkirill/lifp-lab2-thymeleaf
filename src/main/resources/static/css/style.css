@@ -142,3 +142,72 @@ h2 {
     max-width: 950px;
 }
 
+.container-form {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #84ccea;
+    color: white;
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+select::placeholder {
+    color: white;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    background-color: #4A90E2;
+    transition: background-color 0.5s ease;
+}
+
+select {
+    width: 107%;
+}
+
+select option {
+    padding: 10px 20px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #84ccea;
+    margin: 10px 0;
+}
+
+input[type="submit"],
+.dialog-button {
+    background-color: #84ccea;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover,
+.dialog-button:hover {
+    background-color: #4A90E2;
+    color: white;
+}
+
+

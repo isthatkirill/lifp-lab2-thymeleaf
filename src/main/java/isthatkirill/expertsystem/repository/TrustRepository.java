@@ -1,18 +1,13 @@
 package isthatkirill.expertsystem.repository;
 
-import isthatkirill.expertsystem.model.Job;
+import isthatkirill.expertsystem.model.Trust;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 /**
  * @author Kirill Emelyanov
  */
 
 @Repository
-public interface JobRepository extends JpaRepository<Job, Long> {
-
-    Optional<Job> findByName(String name);
-
+public interface TrustRepository extends JpaRepository<Trust, Long> {
 }

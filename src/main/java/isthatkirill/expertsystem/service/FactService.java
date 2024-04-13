@@ -1,48 +1,18 @@
 package isthatkirill.expertsystem.service;
 
 import isthatkirill.expertsystem.model.Fact;
-import isthatkirill.expertsystem.repository.FactRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * @author Kirill Emelyanov
  */
 
-@Service
-@RequiredArgsConstructor
-public class FactService {
+public interface FactService {
 
-    private final FactRepository factRepository;
-    private final Scanner scanner = new Scanner(System.in);
+    List<Fact> getFacts();
 
-    public List<Fact> getFacts() {
-        return factRepository.findAll();
-    }
+    Fact saveFact(Map<String, String> params);
 
-    public List<Long> getPositiveFacts() {
-        List<Fact> facts = factRepository.findAll();
-        List<Long> positiveFacts = new ArrayList<>();
-
-        for (Fact fact : facts) {
-            System.out.println(fact.getDescription() + " (y/n)");
-            if (scanner.nextLine().equalsIgnoreCase("y")) {
-                positiveFacts.add(fact.getId());
-            }
-        }
-
-        return positiveFacts;
-    }
-
-    public List<Long> filterPositive(Map<String, String> facts) {
-        return facts.entrySet().stream()
-                .filter(entry -> entry.getValue().equalsIgnoreCase("true"))
-                .map(entry -> Long.parseLong(entry.getKey()))
-                .toList();
-    }
 }
