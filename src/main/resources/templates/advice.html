@@ -11,7 +11,7 @@
     <h2 th:case="null">Вопросов нет!</h2>
     <div th:case="*">
         <h2>Ответьте на вопросы</h2>
-        <form action="/expert-system/advice" method="post">
+        <form th:action="@{/expert-system/advice}" th:method="post">
             <table>
                 <thead>
                 <tr>

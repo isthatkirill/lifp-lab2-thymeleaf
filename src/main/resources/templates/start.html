@@ -12,7 +12,12 @@
     </div>
 </div>
 
-<div th:unless="${factCreated != null}">
+<div th:if="${factDeleted != null}">
+    <div th:text="'Факт с id = ' + ${factDeleted} + ' удален'" class="description">
+    </div>
+</div>
+
+<div th:if="${factCreated == null and factDeleted == null}">
     <div class="description">
         <p>Добро пожаловать в экспертную систему, помогающую выбрать будущую
             техническую профессию.</p>

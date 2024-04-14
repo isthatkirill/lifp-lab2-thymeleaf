@@ -179,10 +179,6 @@ select:focus {
     transition: background-color 0.5s ease;
 }
 
-select {
-    width: 107%;
-}
-
 select option {
     padding: 10px 20px;
 }

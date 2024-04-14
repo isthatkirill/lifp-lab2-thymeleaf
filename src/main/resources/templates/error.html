@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{navbar}"></div>
+
+<div th:if="${error != null}">
+    <div th:text="'Прозошла ошибка (' + ${error} + '). Проверьте правильность вашего запроса или обратитесь к администратору.'"
+         class="description">
+    </div>
+</div>
+
+<div class="button-container">
+    <a th:href="@{/expert-system/start}" class="button">На главную</a>
+</div>
+
+<div class="offset"></div>
+
+</body>
+</html>

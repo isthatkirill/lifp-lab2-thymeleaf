@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <script th:src="@{/js/pathreplacer.js}" defer></script>
+</head>
+<body>
+
+<div th:replace="~{navbar}"></div>
+
+<div style="max-width: 800px" class="container-form">
+    <h4>Удалить факт</h4>
+    <form id="deleteForm" th:action="@{/expert-system/facts/delete/}" th:method="delete">
+        <select name="id" id="factSelect" required>
+            <option value="" selected>Выберите факт</option>
+            <div th:each="fact: ${facts}">
+                <option th:value="${fact.id}"
+                        th:text="'Id = ' + ${fact.id} + ' (' + ${fact.description} + ')'"></option>
+            </div>
+        </select>
+        <input type="submit" value="Удалить"/>
+    </form>
+</div>
+
+<div class="offset"></div>
+
+</body>
+</html>

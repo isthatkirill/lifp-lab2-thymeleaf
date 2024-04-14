@@ -41,6 +41,11 @@ public class FactServiceImpl implements FactService {
         return fact;
     }
 
+    @Override
+    public void deleteFact(Long factId) {
+        factRepository.deleteById(factId);
+    }
+
     private void saveTrusts(Map<String, String> params, Fact fact) {
         params.forEach((key, value) -> {
             Trust trust = new Trust();
@@ -55,6 +60,5 @@ public class FactServiceImpl implements FactService {
         return jobRepository.findByName(name)
                 .orElseThrow(EntityNotFoundException::new);
     }
-
 
 }
