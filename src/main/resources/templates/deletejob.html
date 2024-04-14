@@ -8,14 +8,14 @@
 
 <div th:replace="~{navbar}"></div>
 
-<div style="max-width: 800px" class="container-form">
-    <h4>Удалить факт</h4>
-    <form id="myForm" th:action="@{/expert-system/facts/delete}" th:method="delete">
+<div style="max-width: 600px" class="container-form">
+    <h4>Удалить профессию</h4>
+    <form id="myForm" th:action="@{/expert-system/jobs/delete}" th:method="delete">
         <select name="id" id="mySelect" required>
             <option value="" selected>Выберите факт</option>
-            <div th:each="fact: ${facts}">
-                <option th:value="${fact.id}"
-                        th:text="'Id = ' + ${fact.id} + ' (' + ${fact.description} + ')'"></option>
+            <div th:each="job: ${jobs}">
+                <option th:value="${job.id}"
+                        th:text="'Id = ' + ${job.id} + ' (' + ${job.name} + ')'"></option>
             </div>
         </select>
         <input type="submit" value="Удалить"/>

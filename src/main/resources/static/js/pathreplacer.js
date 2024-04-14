@@ -1,9 +1,9 @@
 let formURLWithoutId = document.getElementById('myForm').action;
 
-document.getElementById('factSelect').addEventListener('change', function () {
-    let factId = this.value;
-    if (factId) {
-        document.getElementById('myForm').action = formURLWithoutId + "/" + factId;
+document.getElementById('mySelect').addEventListener('change', function () {
+    let option = this.value;
+    if (option) {
+        document.getElementById('myForm').action = formURLWithoutId + "/" + option;
     } else {
         document.getElementById('myForm').action = formURLWithoutId;
     }

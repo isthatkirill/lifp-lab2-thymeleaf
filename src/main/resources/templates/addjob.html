@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{navbar}"></div>
+
+<div class="container-form">
+    <h4>Добавить профессию</h4>
+    <form th:action="@{/expert-system/jobs/add}" th:method="post">
+        <input type="text" name="name" placeholder="Название профессии" required/>
+        <br/>
+
+        <div th:switch="${facts}">
+            <h2 th:case="null">Фактов нет!</h2>
+            <div th:case="*">
+                <div th:each="fact: ${facts}">
+                    <div>
+                        <input type="number" th:placeholder="${'МД (' + fact.description + ')'}" required step="0.01"
+                               min="0"
+                               max="1" th:name="${fact.id}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Добавить"/>
+    </form>
+</div>
+
+<div class="offset"></div>
+
+</body>
+</html>

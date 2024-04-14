@@ -22,7 +22,23 @@
     </div>
 </div>
 
-<div th:if="${factCreated == null and factDeleted == null and factUpdated == null}">
+<div th:if="${jobCreated != null}">
+    <div th:text="'Профессия  «' + ${jobCreated.name} + '» добавлена. Id = ' + ${jobCreated.id}" class="description">
+    </div>
+</div>
+
+<div th:if="${jobUpdated != null}">
+    <div th:text="'Профессия «' + ${jobUpdated.name} + '» обновлена. Id = ' + ${jobUpdated.id}" class="description">
+    </div>
+</div>
+
+<div th:if="${jobDeleted != null}">
+    <div th:text="'Профессия с id = ' + ${jobDeleted} + ' удалена'" class="description">
+    </div>
+</div>
+
+<div th:if="${factCreated == null and factDeleted == null and factUpdated == null
+                and jobCreated == null and jobDeleted == null and jobUpdated == null}">
     <div class="description">
         <p>Добро пожаловать в экспертную систему, помогающую выбрать будущую
             техническую профессию.</p>

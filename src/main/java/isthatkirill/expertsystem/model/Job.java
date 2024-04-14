@@ -24,7 +24,7 @@ public class Job {
     @Column(nullable = false, length = 128)
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "job")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "job", cascade = CascadeType.ALL)
     private List<Trust> trusts;
 
 }

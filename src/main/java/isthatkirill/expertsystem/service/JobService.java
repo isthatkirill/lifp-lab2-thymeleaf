@@ -15,4 +15,10 @@ public interface JobService {
 
     List<Job> getJobs();
 
+    Job saveJob(Map<String, String> params);
+
+    void deleteJob(Long jobId);
+
+    Job updateJob(Long jobId, Map<String, String> params);
+
 }

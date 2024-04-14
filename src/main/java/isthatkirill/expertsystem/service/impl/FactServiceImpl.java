@@ -30,7 +30,7 @@ public class FactServiceImpl implements FactService {
 
     @Override
     public List<Fact> getFacts() {
-        return factRepository.findAll();
+        return factRepository.findAllByOrderByIdAsc();
     }
 
     @Override
@@ -61,14 +61,14 @@ public class FactServiceImpl implements FactService {
                 !weight.isBlank() ? weight : String.valueOf(fact.getWeight())
         ));
 
-        updateTrusts(params, fact.getId());
+        updateTrusts(params, factId);
         return factRepository.save(fact);
     }
 
     private void updateTrusts(Map<String, String> params, Long factId) {
         params.forEach((key, value) -> {
             if (!value.isBlank()) {
-                Job job = checkIfJobExists(key);
+                Job job = checkIfJobExists(Long.parseLong(key));
                 Trust trust = checkIfTrustExists(factId, job.getId());
                 trust.setTrustCf(Double.parseDouble(value));
                 trustRepository.save(trust);
@@ -76,12 +76,11 @@ public class FactServiceImpl implements FactService {
         });
     }
 
-
     private void saveTrusts(Map<String, String> params, Fact fact) {
         params.forEach((key, value) -> {
             Trust trust = new Trust();
             trust.setFact(fact);
-            trust.setJob(checkIfJobExists(key));
+            trust.setJob(checkIfJobExists(Long.parseLong(key)));
             trust.setTrustCf(Double.parseDouble(value));
             trustRepository.save(trust);
         });
@@ -97,8 +96,8 @@ public class FactServiceImpl implements FactService {
                 .orElseThrow(EntityNotFoundException::new);
     }
 
-    private Job checkIfJobExists(String name) {
-        return jobRepository.findByName(name)
+    private Job checkIfJobExists(Long jobId) {
+        return jobRepository.findById(jobId)
                 .orElseThrow(EntityNotFoundException::new);
     }
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <script th:src="@{/js/pathreplacer.js}" defer></script>
+</head>
+<body>
+
+<div th:replace="~{navbar}"></div>
+
+<div class="container-form">
+    <h4>Изменить профессию</h4>
+    <form id="myForm" th:action="@{/expert-system/jobs/update}" th:method="patch">
+
+        <select name="id" id="mySelect" required>
+            <option value="" selected>Выберите профессию</option>
+            <div th:each="job: ${jobs}">
+                <option th:value="${job.id}"
+                        th:text="'Id = ' + ${job.id} + ' (' + ${job.name} + ')'"></option>
+            </div>
+        </select>
+
+        <input type="text" name="name" placeholder="Новое название профессии"/>
+        <br/>
+
+        <div th:switch="${jobs}">
+            <h2 th:case="null">Профессий нет!</h2>
+            <div th:case="*">
+                <div th:each="fact: ${facts}">
+                    <div>
+                        <input type="number" th:placeholder="${'МД (' + fact.description + ')'}" step="0.01" min="0"
+                               max="1"
+                               th:name="${fact.id}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Обновить"/>
+    </form>
+</div>
+
+<div class="offset"></div>
+
+</body>
+</html>
