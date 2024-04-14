@@ -39,29 +39,38 @@ public class MainController {
 
     @GetMapping("/facts/add")
     public String getAddFactPage(Model model) {
-        List<Job> jobs = jobService.getJobs();
-        model.addAttribute("jobs", jobs);
+        model.addAttribute("jobs", jobService.getJobs());
         return "addfact";
+    }
+
+    @GetMapping("/facts/update")
+    public String getUpdateFactPage(Model model) {
+        model.addAttribute("jobs", jobService.getJobs());
+        model.addAttribute("facts", factService.getFacts());
+        return "updatefact";
     }
 
     @GetMapping("/facts/delete")
     public String getDeleteFactPage(Model model) {
-        List<Fact> facts = factService.getFacts();
-        model.addAttribute("facts", facts);
+        model.addAttribute("facts", factService.getFacts());
         return "deletefact";
     }
 
     @PostMapping("/advice")
     public String getResults(@RequestParam Map<String, String> answers, Model model) {
-        Map<String, Double> resultCfs = jobService.getResults(answers);
-        model.addAttribute("resultCfs", resultCfs);
+        model.addAttribute("resultCfs", jobService.getResults(answers));
         return "result";
     }
 
     @PostMapping("/facts/add")
     public String addFact(@RequestParam Map<String, String> params, Model model) {
-        Fact fact = factService.saveFact(params);
-        model.addAttribute("factCreated", fact);
+        model.addAttribute("factCreated", factService.saveFact(params));
+        return "start";
+    }
+
+    @PatchMapping("/facts/update/{factId}")
+    public String updateFact(Model model, @PathVariable Long factId, @RequestParam Map<String, String> params) {
+        model.addAttribute("factUpdated", factService.updateFact(factId, params));
         return "start";
     }
 
@@ -71,6 +80,5 @@ public class MainController {
         model.addAttribute("factDeleted", factId);
         return "start";
     }
-
 
 }

@@ -9,6 +9,7 @@ import isthatkirill.expertsystem.repository.TrustRepository;
 import isthatkirill.expertsystem.service.FactService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.Map;
  * @author Kirill Emelyanov
  */
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class FactServiceImpl implements FactService {
@@ -46,6 +48,35 @@ public class FactServiceImpl implements FactService {
         factRepository.deleteById(factId);
     }
 
+    @Override
+    public Fact updateFact(Long factId, Map<String, String> params) {
+        params.remove("_method");
+        params.remove("id");
+
+        Fact fact = checkIfFactExists(factId);
+        String weight = params.remove("weight");
+        String description = params.remove("description");
+        fact.setDescription(!description.isBlank() ? description : fact.getDescription());
+        fact.setWeight(Double.parseDouble(
+                !weight.isBlank() ? weight : String.valueOf(fact.getWeight())
+        ));
+
+        updateTrusts(params, fact.getId());
+        return factRepository.save(fact);
+    }
+
+    private void updateTrusts(Map<String, String> params, Long factId) {
+        params.forEach((key, value) -> {
+            if (!value.isBlank()) {
+                Job job = checkIfJobExists(key);
+                Trust trust = checkIfTrustExists(factId, job.getId());
+                trust.setTrustCf(Double.parseDouble(value));
+                trustRepository.save(trust);
+            }
+        });
+    }
+
+
     private void saveTrusts(Map<String, String> params, Fact fact) {
         params.forEach((key, value) -> {
             Trust trust = new Trust();
@@ -54,6 +85,16 @@ public class FactServiceImpl implements FactService {
             trust.setTrustCf(Double.parseDouble(value));
             trustRepository.save(trust);
         });
+    }
+
+    private Trust checkIfTrustExists(Long factId, Long jobId) {
+        return trustRepository.findByFactIdAndJobId(factId, jobId)
+                .orElseThrow(EntityNotFoundException::new);
+    }
+
+    private Fact checkIfFactExists(Long factId) {
+        return factRepository.findById(factId)
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     private Job checkIfJobExists(String name) {

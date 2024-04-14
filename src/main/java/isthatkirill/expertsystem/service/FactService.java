@@ -17,4 +17,6 @@ public interface FactService {
 
     void deleteFact(Long factId);
 
+    Fact updateFact(Long factId, Map<String, String> params);
+
 }

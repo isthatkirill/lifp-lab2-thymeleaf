@@ -183,6 +183,10 @@ select option {
     padding: 10px 20px;
 }
 
+select {
+    width: 107%;
+}
+
 hr {
     border: none;
     border-top: 1px solid #84ccea;

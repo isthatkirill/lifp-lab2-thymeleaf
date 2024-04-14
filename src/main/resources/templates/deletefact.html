@@ -10,7 +10,7 @@
 
 <div style="max-width: 800px" class="container-form">
     <h4>Удалить факт</h4>
-    <form id="deleteForm" th:action="@{/expert-system/facts/delete/}" th:method="delete">
+    <form id="myForm" th:action="@{/expert-system/facts/delete}" th:method="delete">
         <select name="id" id="factSelect" required>
             <option value="" selected>Выберите факт</option>
             <div th:each="fact: ${facts}">

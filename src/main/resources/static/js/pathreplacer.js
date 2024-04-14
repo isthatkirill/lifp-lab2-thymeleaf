@@ -1,5 +1,10 @@
+let formURLWithoutId = document.getElementById('myForm').action;
+
 document.getElementById('factSelect').addEventListener('change', function () {
     let factId = this.value;
-    let form = document.getElementById('deleteForm');
-    form.action = '/expert-system/facts/delete/' + factId;
+    if (factId) {
+        document.getElementById('myForm').action = formURLWithoutId + "/" + factId;
+    } else {
+        document.getElementById('myForm').action = formURLWithoutId;
+    }
 });
